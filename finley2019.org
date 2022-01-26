@@ -1,0 +1,126 @@
+* Efficient Algorithms for Bayesian Nearest Neighbor Gaussian Processes
+  Andrew O. Finley, Abhirup Datta, Bruce D. Cook, Douglas C. Morton,
+  Hans E. Andersen & Sudipto Banerjee 2019
+  https://doi.org/10.1080/10618600.2018.1537924
+
+** Introduction
+   - exploit high-performance computing libraries to obviate expensive
+     numerical linear algebra (e.g., expensive matrix multiplications
+     and factorizations)
+   - outlining three alternate formulations that are significantly
+     more efficient for practical implementation than Datta et
+     al. (2016a)
+   - application to 5 million locations
+
+**  Nearest Neighbor Gaussian Processes
+   Let $y(\mathbf{s}_i)$ and $\mathbf{x}(\mathbf{s}_i)$ denote the
+   response and the predictors at location $\mathbf{s}_i$ for $i = 1,
+   \dots, n$, $y(\mathbf{s}_i) = {\mathbf{x}(\mathbf{s}_i)}^\top
+   \mathbf{\beta} + w(\mathbf{s}_i) + \varepsilon(\mathbf{s}_i)$ with
+   iid noise $\varepsilon(\mathbf{s}_i)$, a spatial random effect
+   $w(\mathbf{s}_i) \sim \text{GP}(0, C(\cdot | \mathbf{\theta}))$,
+   and posterior
+
+   \begin{align}
+      p(\mathbf{\beta}, \mathbf{\theta}, \tau^2) \times
+      \textsc{N}(\mathbf{w} | \mathbf{\theta}, \mathbf{C}) \times
+      N(\mathbf{y} | \mathbf{X}\mathbf{\beta} + \mathbf{w}, \tau^2 \mathbf{I})
+   \end{align}
+
+   for some prior $p(\mathbf{\beta}, \mathbf{\theta}, \tau^2)$,
+   Limitations: (i) $\mathbf{C}$ requires $O(n^2)$ dynamic memory,
+   (ii) $\textsc{N}(\mathbf{w} | \mathbf{\theta}, \mathbf{C})$
+   involves factorizations (e.g., Cholesky) that require $O(n^3)$
+   flops, (iii) predicting at $K$ new locations require $O(Kn^2)$
+   flops.
+
+   Note that $\textsc{N}(\mathbf{w} | \mathbf{\theta}, \mathbf{C})$
+   can be rewritten as $\mathbf{w} = \mathbf{A}\mathbf{w} +
+   \mathbf{\eta}$, where $\mathbf{A}$ is $n \times n$ strictly
+   lower-triangular with elements aij = 0, whenever $j \le i$ and
+   $\eta \sim \textsc{N}(0, \mathbf{D})$ and $\mathbf{D}$ is
+   diagonal with entries $d_{11} = \text{var}(w_1)$ and $d_{ii} =
+   \text{var}(w_i | \{w_j : j < i\})$. Then, $\mathbf{C} =
+   {(\mathbf{I} − \mathbf{A})}^{-1} \mathbf{D}{(I − A)}^{-\top}$ with
+   $D_{1,1} = C_{1,1}$ and $\mathbf{A}\textsc{[}1, \cdot\textsc{]} =
+   \mathbf{0}$ (null top row).
+
+   Setting some elements in the lower triangular part of $\mathbf{A}$
+   to be zero reduces inversion complexity from $O(n^3)$ to $O(n
+   m^3)$, where $m$ is the number of nonzero elements in each row of
+   $\mathbf{A}$. With $\tilde{\mathbf{C}} = {(\mathbf{I} −
+   \mathbf{A})}^{-1} \mathbf{D}{(I − A)}^{-\top}$,
+   $\tilde{\mathbf{C}}^{-1} = {(\mathbf{I} − \mathbf{A})}^{\top}
+   \mathbf{D}^{-1}{(I − A)}$ becomes sparse reducing the computation
+   of quadratic forms $\mathbf{u}^{\top} \tilde{\mathbf{C}}^{-1}
+   \mathbf{v}$ from $O(n^2)$ to $O(nm))$. Also,
+   $\text{det}(\tilde{\mathbf{C}}) = \prod_{i=1}^n d_{ii}$. Note that
+   while $\tilde{\mathbf{C}}$ need not be sparse,
+   $\textsc{N}(\mathbf{w} | \mathbf{\theta}, \mathbf{C})$ is evaluated
+   in linear time $O(n)$.
+
+   The MCMC implementation in Datta et al. (2016a), which requires
+   updating the $n$ latent spatial effects $\mathbf{w}$ sequentially,
+   often is slow convergence. Three alternative models exploit
+   marginalizing out the vector of spatial random effects.
+
+*** Collapsed NNGP
+    Consider $\textsc{N}(\mathbf{y} | \mathbf{X}\mathbf{\beta} +
+    \mathbf{w}, \tau^2 \mathbf{I}) \times \textsc{N}(\mathbf{w} |
+    \mathbf{0}, \tilde{\mathbf{C}})$, then $\mathbf{y} \sim
+    N(\mathbf{X}\mathbf{\beta}, \mathbf{\Lambda})$ where
+    $\mathbf{\Lambda} = \tilde{\mathbf{C}} + \tau^2 \mathbf{I}$. This
+    model has $p + 4 < n + p + 4, p = |\mathbf{\beta}$ parameters. The
+    exact computational cost, which depends on the data design via the
+    location of the nonzero entries in the Cholesky factor, can be
+    more than linear. See Algorithm 1 in paper for a Gibbs sampler
+    with Metropolis-Hastings update, Algorithm 2 for inference on the
+    spatial effect and prediction at new locations.
+
+*** NNGP for the response
+    Apply nearest neighbor approximation directly to the marginal
+    likelihood of $\mathbf{y}$, i.e., $y(\mathbf{s}) \sim
+    \textsc{N}({\mathbf{x}(\mathbf{s})}^{\top}, \mathbf{\Sigma})$
+    using a sparse covariance matrix $\tilde{\mathbf{\Sigma}} \approx
+    \mathbf{\Sigma} = \mathbf{C} + \tau^2 \mathbf{I}$ . Cannot recover
+    $\mathbf{w}$, use when the interest is on
+    prediction. Computationally parsimonious solution for fully
+    Bayesian analysis of massive spatial datasets. See Algorithm 3 and
+    4 for MCMC and posterior predictive inference on the response.
+
+*** Conjugate NNGP for MCMC-free exact Bayesian inference
+    A hybrid cross-validation approach used when inference on
+    covariance parameters is of little interest. See Algorithm 5.
+
+** Implementation
+   C++ with =openBLAS= and =LAPACK= for matrix algebra, =openMP= for
+   parallelization (=omp for= for precision matrix components, =omp
+   for= with =reduction= clause to compute quadratic form in
+   Pseudocode 3). Use an efficient search algorithm for fast neighest
+   neighbors rather than bruteforcing.
+   - Experiment #1 (model run time)
+     - permutation matrix has large impact con efficiency
+     - response is dramatically faster than collapsed
+     - marginal and negligible improvement beyond 6 and 12 CPUs,
+       overhead if more
+     - point of diminishing returns vary with $n$
+     - run time: 13, 13, 95 seconds per iteration with a $n = 10^7$
+       (ten million!) for response, conjugate, and collapse
+   - Experiment #2 (prediction)
+     - all methods yield similar statistics
+   - TIU dataset
+     - 5 million data points
+     - $m = 15$ and $m = 25$ produce indistinguishable results
+     - similar, if not identical, prediction statistics across all
+       methods
+     - run time: 318, 38, 2E-3 hours for collapse (25,000 samples),
+       response, and conjugate NNGP
+
+** Summary
+   - collapsed is the only fully Bayesian alternative for inference
+     on the spatial random effects
+   - conjugate model's uncompromised predictive inference requires the
+     specification of some model parameters
+   - the =spNNGP= R package implements response and conjugate NNGP
+   - for nonstationary processes, dynamic neighbor-finding algorithms
+     may offer better starting point

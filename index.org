@@ -1,0 +1,37 @@
+#+HTML_HEAD: <link id="pagestyle" rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css">
+# #+HTML_HEAD: <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+# #+HTML_HEAD: <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+#+AUTHOR: Luis Damiano
+#+TITLE: Literature notes
+#+DESCRIPTION: Luis Damiano Knowledge Base, Tips & Tricks, gotchas
+#+KEYWORDS: syntax, quick reference, cheat sheet, recommended practices
+#+KEYWORDS: best practices, don't repeat yourself, automation
+#+LANGUAGE: en
+#+PROPERTY: header-args -n :eval no
+#+EXPORT_FILE_NAME: index
+#+OPTIONS: toc:0
+
+One day I decided to put all my notes in one place, let's see how it
+turns out. These might well be incomplete, erroneous. and make not a
+favor to the authors. Don't blame anyone for the stuff written below.
+
+$\def\textsc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}$
+
+-----
+
+
+#+TOC: headlines 2
+
+
+-----
+
+
+#+INCLUDE: vecchia1988.org
+
+
+-----
+
+
+#+INCLUDE: finley2019.org
+
+-----

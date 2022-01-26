@@ -1,0 +1,80 @@
+* Estimation and Model Identification for Continuous Spatial
+  A. V. Vecchia 1988
+  https://doi.org/10.1111/j.2517-6161.1988.tb01729.x
+
+** Introduction
+   - An empirical variogram is basically a method of moments estimate
+     of the true variogram, so nicely put :)
+   - $n$ observations, $m$ neighbors s.t. $m << n$
+   - Approximate likelihood functions $L_m \to L$ as $m \to n$
+   - Iterative estimation whereby estimates based on $L_m$ are used as
+     initial values for estimates based on $L_{m + 1}$
+
+** Estimation
+*** Approximate likelihood function
+    Let $\mathbf{z} = \xi(\mathbf{x}) + \mathbf{\eta}$, $\xi$ is a
+    spatial component and $\mathbf{\eta}$ an iid error[fn:1]. The
+    exact likelihood is
+
+    \begin{align}
+      L(\mathbf{z})
+      &=
+         {\left(2\pi\right)}^{-n/2}
+         {\left(\sigma^2\gamma\right)}^{-n/2}
+         {\left|\mathbf{R} + \nu^2 \mathbf{I} \right|}^{-1/2}
+         \exp\left\{
+         {-(2\sigma^2\gamma)}^{-1}
+         \mathbf{z}^\top {(\mathbf{R} + \nu^2 \mathbf{I})}^{-1} \mathbf{z}
+        \right\} \\
+      \gamma
+      &= \text{var}\left(\xi\right) / \sigma^2 \\
+      \mathbf{R}
+      &= \text{cor}\left(\xi\right) \\
+      \nu^2
+      &= \sigma^2_\eta / \text{var}\left(\xi\right)
+    \end{align}
+
+    In terms of conditional normal probability functions $p(\cdot |
+    \cdot)$,
+
+    \begin{align}
+      L(z)
+      &= \prod_i^n p(\mathbf{z}_i | \left\{z_j \forall j \ne i \right\}) \\
+      &\approx \prod_i^n p(\mathbf{z}_i | \mathbf{z}_{im})
+    \end{align}
+
+    where $z_{i}$ contains all but the \(i\)-th observation and $z_{im}$
+    contains a $m$ neighbors around the $i$-th
+    observation[fn:2]. Select observations to include in
+    $\mathbf{z}_{im}$ to some computationally thrifty criterion. If
+    the criterion depends on the model form and parameter values
+    (e.g., the length-scale), it can cause instabilities in iterative
+    parameter estimation procedure. For example, select the $m$
+    observations which smallest Euclidean distance in the inputs. The
+    exact likelihood equation is invariant to permutations of the
+    observations but the approximate equation is not, especially for
+    small $m$. Systematic ordering rules include lexicographical
+    ordering in the input values (e.g., coordinates), or subseting
+    from observations within a fixed distance (e.g., for lattice
+    data).
+*** Iterative maximum likelihood estimation
+    The \(m\)-order approximate maximum likelihood estimates 
+    $\hat{\mathbf{\psi}}_m$ are obtained by numerically maximizing the
+    approximate likelihood function $L_m$ for fixed $m << n$. Start
+    with $m=1$ with some initial values $\mathbf{\psi}_0$, estimate
+    iteratively[fn:3] $\hat{\mathbf{\psi}}_{m + 1}$ by numerically
+    maximizing $L_{m + 1}$ with starting values
+    $\hat{\mathbf{\psi}}_{m}$. Increase $m$ until convergence is
+    achieved based on some statistic and an arbitrarily small change,
+    e.g., $\Lambda_m = -2 \log
+    L_m\left(\hat{\mathbf{\psi}}_{m}\right)$ where $\Lambda_m \to -2
+    \log \hat{L}_n$ as $m \to n$ approaches the maximized exact
+    likelihood function. The application section monitors Akaike's
+    information criterion $A_m = \Lambda_m + 2 |\mathbf{\psi}|$.
+
+[fn:1] The original paper has a linear mean model that was assumed to
+be zero for these notes. GLS for linear coefficients should be easy to
+plug in.
+[fn:2] The paper starts with spatially or temporally ordered neighbors
+$\left\{z_j: 1 \le j \le i - 1\right\}$.
+[fn:3] No need to increase $m$ by an unit really.
