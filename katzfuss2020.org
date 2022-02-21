@@ -1,0 +1,34 @@
+* Vecchia Approximations of Gaussian-Process Predictions
+  Matthias Katzfuss, Joseph Guinness, Wenlong Gong & Daniel Zilber 2020
+  https://doi.org/10.1007/s13253-020-00401-7
+
+** Introduction
+   - GP approximations
+     - sparse covariance matrix, sparse precision matrix, composite
+       likelihood, low-rank structure.
+     - Low-rank approaches are poorly suited for fine-scale dependence
+     - Sparse methods cannot guarantee linear times
+     - Local GP approximations do not scale well to joint predictions
+       at many locations
+   - Vecchia approximation
+     - Training: sparse Cholesky factor of the precision matrix by removing
+       conditioning variables in a factorization of the observations
+       joint density into a product of conditional distributions
+     - Prediction: Vecchia's one-at-a-time has squared time
+       complexity, Finley one-for-one output sampling from the
+       posterior predictive distributions using a covariance matrix
+       constructed only with neighbors, conditional expectation and
+       uncertainty quantification via conditional simulations, domain
+       partitioning approximations
+   - This paper approach guarantees sparsity of the matrices necessary
+     for inference, resulting in linear memory and time complexity in
+     the number of data points and predictions for fixed
+     conditioning-set size
+** General Vecchia Framework
+   - For a vector $mathbf{x}$ with precision matrix $\mathbf{Q}$,
+     $\mathbf{U} = \textsc{rchol}\left(\mathbf{Q}\right)$ is the
+     upper-lower Cholesky decomposition of $\mathbf{Q}$
+     s.t. $\mathbf{Q} = \mathbf{U}\mathbf{U}^{\top}$. Nonzero entries
+     of $\mathbf{U}$ can be computed directly, i.e., the matrix
+     $\mathbf{Q}$ need not be constructed.
+   - 

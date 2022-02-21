@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-02-21 Mon 13:00 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Literature notes</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Luis Damiano" />
+<meta name="description" content="Luis Damiano Knowledge Base, Tips &amp; Tricks, gotchas"
+ />
+<meta name="keywords" content="syntax, quick reference, cheat sheet, recommended practices best practices, don't repeat yourself, automation" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link id="pagestyle" rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css">
+<style type="text/css">
+ pre.src {background-color: #282a36; color: #f8f8f2;}</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Literature notes</h1>
+<p>
+One day I decided to put all my notes in one place, let's see how it
+turns out. These might well be incomplete, erroneous. and make not a
+favor to the authors. Don't blame anyone for the stuff written below.
+</p>
+
+<p>
+\(\def\textsc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}\)
+</p>
+
+<hr />
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#Estimation%20and%20Model%20Identification%20for%20Continuous%20Spatial">1. Estimation and Model Identification for Continuous Spatial</a>
+<ul>
+<li><a href="#Introduction">1.1. Introduction</a></li>
+<li><a href="#Estimation">1.2. Estimation</a></li>
+</ul>
+</li>
+<li><a href="#Efficient%20Algorithms%20for%20Bayesian%20Nearest%20Neighbor%20Gaussian%20Processes">2. Efficient Algorithms for Bayesian Nearest Neighbor Gaussian Processes</a>
+<ul>
+<li><a href="#Efficient%20Algorithms%20for%20Bayesian%20Nearest%20Neighbor%20Gaussian%20Processes--Introduction">2.1. Introduction</a></li>
+<li><a href="#Nearest%20Neighbor%20Gaussian%20Processes">2.2. Nearest Neighbor Gaussian Processes</a></li>
+<li><a href="#Implementation">2.3. Implementation</a></li>
+<li><a href="#Summary">2.4. Summary</a></li>
+</ul>
+</li>
+<li><a href="#Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions">3. Vecchia Approximations of Gaussian-Process Predictions</a>
+<ul>
+<li><a href="#Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions--Introduction">3.1. Introduction</a></li>
+<li><a href="#General%20Vecchia%20Framework">3.2. General Vecchia Framework</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<hr />
+
+
+<div id="outline-container-Estimation%20and%20Model%20Identification%20for%20Continuous%20Spatial" class="outline-2">
+<h2 id="Estimation%20and%20Model%20Identification%20for%20Continuous%20Spatial"><span class="section-number-2">1</span> Estimation and Model Identification for Continuous Spatial</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+A. V. Vecchia 1988
+<a href="https://doi.org/10.1111/j.2517-6161.1988.tb01729.x">https://doi.org/10.1111/j.2517-6161.1988.tb01729.x</a>
+</p>
+</div>
+
+<div id="outline-container-Introduction" class="outline-3">
+<h3 id="Introduction"><span class="section-number-3">1.1</span> Introduction</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>An empirical variogram is basically a method of moments estimate
+of the true variogram, so nicely put :)</li>
+<li>\(n\) observations, \(m\) neighbors s.t. \(m << n\)</li>
+<li>Approximate likelihood functions \(L_m \to L\) as \(m \to n\)</li>
+<li>Iterative estimation whereby estimates based on \(L_m\) are used as
+initial values for estimates based on \(L_{m + 1}\)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-Estimation" class="outline-3">
+<h3 id="Estimation"><span class="section-number-3">1.2</span> Estimation</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-Approximate%20likelihood%20function" class="outline-4">
+<h4 id="Approximate%20likelihood%20function"><span class="section-number-4">1.2.1</span> Approximate likelihood function</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+Let \(\mathbf{z} = \xi(\mathbf{x}) + \mathbf{\eta}\), \(\xi\) is a
+spatial component and \(\mathbf{\eta}\) an iid error<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. The
+exact likelihood is
+</p>
+
+\begin{align}
+  L(\mathbf{z})
+  &=
+     {\left(2\pi\right)}^{-n/2}
+     {\left(\sigma^2\gamma\right)}^{-n/2}
+     {\left|\mathbf{R} + \nu^2 \mathbf{I} \right|}^{-1/2}
+     \exp\left\{
+     {-(2\sigma^2\gamma)}^{-1}
+     \mathbf{z}^\top {(\mathbf{R} + \nu^2 \mathbf{I})}^{-1} \mathbf{z}
+    \right\} \\
+  \gamma
+  &= \text{var}\left(\xi\right) / \sigma^2 \\
+  \mathbf{R}
+  &= \text{cor}\left(\xi\right) \\
+  \nu^2
+  &= \sigma^2_\eta / \text{var}\left(\xi\right)
+\end{align}
+
+<p>
+In terms of conditional normal probability functions \(p(\cdot |
+    \cdot)\),
+</p>
+
+\begin{align}
+  L(z)
+  &= \prod_i^n p(\mathbf{z}_i | \left\{z_j \forall j \ne i \right\}) \\
+  &\approx \prod_i^n p(\mathbf{z}_i | \mathbf{z}_{im})
+\end{align}
+
+<p>
+where \(z_{i}\) contains all but the \(i\)-th observation and \(z_{im}\)
+contains a \(m\) neighbors around the $i$-th
+observation<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>. Select observations to include in
+\(\mathbf{z}_{im}\) to some computationally thrifty criterion. If
+the criterion depends on the model form and parameter values
+(e.g., the length-scale), it can cause instabilities in iterative
+parameter estimation procedure. For example, select the \(m\)
+observations which smallest Euclidean distance in the inputs. The
+exact likelihood equation is invariant to permutations of the
+observations but the approximate equation is not, especially for
+small \(m\). Systematic ordering rules include lexicographical
+ordering in the input values (e.g., coordinates), or subseting
+from observations within a fixed distance (e.g., for lattice
+data).
+</p>
+</div>
+</div>
+<div id="outline-container-Iterative%20maximum%20likelihood%20estimation" class="outline-4">
+<h4 id="Iterative%20maximum%20likelihood%20estimation"><span class="section-number-4">1.2.2</span> Iterative maximum likelihood estimation</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+The \(m\)-order approximate maximum likelihood estimates 
+\(\hat{\mathbf{\psi}}_m\) are obtained by numerically maximizing the
+approximate likelihood function \(L_m\) for fixed \(m << n\). Start
+with \(m=1\) with some initial values \(\mathbf{\psi}_0\), estimate
+iteratively<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> \(\hat{\mathbf{\psi}}_{m + 1}\) by numerically
+maximizing \(L_{m + 1}\) with starting values
+\(\hat{\mathbf{\psi}}_{m}\). Increase \(m\) until convergence is
+achieved based on some statistic and an arbitrarily small change,
+e.g., \(\Lambda_m = -2 \log
+    L_m\left(\hat{\mathbf{\psi}}_{m}\right)\) where \(\Lambda_m \to -2
+    \log \hat{L}_n\) as \(m \to n\) approaches the maximized exact
+likelihood function. The application section monitors Akaike's
+information criterion \(A_m = \Lambda_m + 2 |\mathbf{\psi}|\).
+</p>
+
+<hr />
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-Efficient%20Algorithms%20for%20Bayesian%20Nearest%20Neighbor%20Gaussian%20Processes" class="outline-2">
+<h2 id="Efficient%20Algorithms%20for%20Bayesian%20Nearest%20Neighbor%20Gaussian%20Processes"><span class="section-number-2">2</span> Efficient Algorithms for Bayesian Nearest Neighbor Gaussian Processes</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Andrew O. Finley, Abhirup Datta, Bruce D. Cook, Douglas C. Morton,
+Hans E. Andersen &amp; Sudipto Banerjee 2019
+<a href="https://doi.org/10.1080/10618600.2018.1537924">https://doi.org/10.1080/10618600.2018.1537924</a>
+</p>
+</div>
+
+<div id="outline-container-Efficient%20Algorithms%20for%20Bayesian%20Nearest%20Neighbor%20Gaussian%20Processes--Introduction" class="outline-3">
+<h3 id="Efficient%20Algorithms%20for%20Bayesian%20Nearest%20Neighbor%20Gaussian%20Processes--Introduction"><span class="section-number-3">2.1</span> Introduction</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>exploit high-performance computing libraries to obviate expensive
+numerical linear algebra (e.g., expensive matrix multiplications
+and factorizations)</li>
+<li>outlining three alternate formulations that are significantly
+more efficient for practical implementation than Datta et
+al. (2016a)</li>
+<li>application to 5 million locations</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-Nearest%20Neighbor%20Gaussian%20Processes" class="outline-3">
+<h3 id="Nearest%20Neighbor%20Gaussian%20Processes"><span class="section-number-3">2.2</span> Nearest Neighbor Gaussian Processes</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Let \(y(\mathbf{s}_i)\) and \(\mathbf{x}(\mathbf{s}_i)\) denote the
+response and the predictors at location \(\mathbf{s}_i\) for \(i = 1,
+   \dots, n\), \(y(\mathbf{s}_i) = {\mathbf{x}(\mathbf{s}_i)}^\top
+   \mathbf{\beta} + w(\mathbf{s}_i) + \varepsilon(\mathbf{s}_i)\) with
+iid noise \(\varepsilon(\mathbf{s}_i)\), a spatial random effect
+\(w(\mathbf{s}_i) \sim \text{GP}(0, C(\cdot | \mathbf{\theta}))\),
+and posterior
+</p>
+
+\begin{align}
+   p(\mathbf{\beta}, \mathbf{\theta}, \tau^2) \times
+   \textsc{N}(\mathbf{w} | \mathbf{\theta}, \mathbf{C}) \times
+   N(\mathbf{y} | \mathbf{X}\mathbf{\beta} + \mathbf{w}, \tau^2 \mathbf{I})
+\end{align}
+
+<p>
+for some prior \(p(\mathbf{\beta}, \mathbf{\theta}, \tau^2)\),
+Limitations: (i) \(\mathbf{C}\) requires \(O(n^2)\) dynamic memory,
+(ii) \(\textsc{N}(\mathbf{w} | \mathbf{\theta}, \mathbf{C})\)
+involves factorizations (e.g., Cholesky) that require \(O(n^3)\)
+flops, (iii) predicting at \(K\) new locations require \(O(Kn^2)\)
+flops.
+</p>
+
+<p>
+Note that \(\textsc{N}(\mathbf{w} | \mathbf{\theta}, \mathbf{C})\)
+can be rewritten as \(\mathbf{w} = \mathbf{A}\mathbf{w} +
+   \mathbf{\eta}\), where \(\mathbf{A}\) is \(n \times n\) strictly
+lower-triangular with elements aij = 0, whenever \(j \le i\) and
+\(\eta \sim \textsc{N}(0, \mathbf{D})\) and \(\mathbf{D}\) is
+diagonal with entries \(d_{11} = \text{var}(w_1)\) and \(d_{ii} =
+   \text{var}(w_i | \{w_j : j < i\})\). Then, \(\mathbf{C} =
+   {(\mathbf{I} − \mathbf{A})}^{-1} \mathbf{D}{(I − A)}^{-\top}\) with
+\(D_{1,1} = C_{1,1}\) and \(\mathbf{A}\textsc{[}1, \cdot\textsc{]} =
+   \mathbf{0}\) (null top row).
+</p>
+
+<p>
+Setting some elements in the lower triangular part of \(\mathbf{A}\)
+to be zero reduces inversion complexity from \(O(n^3)\) to \(O(n
+   m^3)\), where \(m\) is the number of nonzero elements in each row of
+\(\mathbf{A}\). With \(\tilde{\mathbf{C}} = {(\mathbf{I} −
+   \mathbf{A})}^{-1} \mathbf{D}{(I − A)}^{-\top}\),
+\(\tilde{\mathbf{C}}^{-1} = {(\mathbf{I} − \mathbf{A})}^{\top}
+   \mathbf{D}^{-1}{(I − A)}\) becomes sparse reducing the computation
+of quadratic forms \(\mathbf{u}^{\top} \tilde{\mathbf{C}}^{-1}
+   \mathbf{v}\) from \(O(n^2)\) to \(O(nm))\). Also,
+\(\text{det}(\tilde{\mathbf{C}}) = \prod_{i=1}^n d_{ii}\). Note that
+while \(\tilde{\mathbf{C}}\) need not be sparse,
+\(\textsc{N}(\mathbf{w} | \mathbf{\theta}, \mathbf{C})\) is evaluated
+in linear time \(O(n)\).
+</p>
+
+<p>
+The MCMC implementation in Datta et al. (2016a), which requires
+updating the \(n\) latent spatial effects \(\mathbf{w}\) sequentially,
+often is slow convergence. Three alternative models exploit
+marginalizing out the vector of spatial random effects.
+</p>
+</div>
+
+<div id="outline-container-Collapsed%20NNGP" class="outline-4">
+<h4 id="Collapsed%20NNGP"><span class="section-number-4">2.2.1</span> Collapsed NNGP</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+Consider \(\textsc{N}(\mathbf{y} | \mathbf{X}\mathbf{\beta} +
+    \mathbf{w}, \tau^2 \mathbf{I}) \times \textsc{N}(\mathbf{w} |
+    \mathbf{0}, \tilde{\mathbf{C}})\), then \(\mathbf{y} \sim
+    N(\mathbf{X}\mathbf{\beta}, \mathbf{\Lambda})\) where
+\(\mathbf{\Lambda} = \tilde{\mathbf{C}} + \tau^2 \mathbf{I}\). This
+model has \(p + 4 < n + p + 4, p = |\mathbf{\beta}\) parameters. The
+exact computational cost, which depends on the data design via the
+location of the nonzero entries in the Cholesky factor, can be
+more than linear. See Algorithm 1 in paper for a Gibbs sampler
+with Metropolis-Hastings update, Algorithm 2 for inference on the
+spatial effect and prediction at new locations.
+</p>
+</div>
+</div>
+
+<div id="outline-container-NNGP%20for%20the%20response" class="outline-4">
+<h4 id="NNGP%20for%20the%20response"><span class="section-number-4">2.2.2</span> NNGP for the response</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+Apply nearest neighbor approximation directly to the marginal
+likelihood of \(\mathbf{y}\), i.e., \(y(\mathbf{s}) \sim
+    \textsc{N}({\mathbf{x}(\mathbf{s})}^{\top}, \mathbf{\Sigma})\)
+using a sparse covariance matrix \(\tilde{\mathbf{\Sigma}} \approx
+    \mathbf{\Sigma} = \mathbf{C} + \tau^2 \mathbf{I}\) . Cannot recover
+\(\mathbf{w}\), use when the interest is on
+prediction. Computationally parsimonious solution for fully
+Bayesian analysis of massive spatial datasets. See Algorithm 3 and
+4 for MCMC and posterior predictive inference on the response.
+</p>
+</div>
+</div>
+
+<div id="outline-container-Conjugate%20NNGP%20for%20MCMC-free%20exact%20Bayesian%20inference" class="outline-4">
+<h4 id="Conjugate%20NNGP%20for%20MCMC-free%20exact%20Bayesian%20inference"><span class="section-number-4">2.2.3</span> Conjugate NNGP for MCMC-free exact Bayesian inference</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<p>
+A hybrid cross-validation approach used when inference on
+covariance parameters is of little interest. See Algorithm 5.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-Implementation" class="outline-3">
+<h3 id="Implementation"><span class="section-number-3">2.3</span> Implementation</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+C++ with <code>openBLAS</code> and <code>LAPACK</code> for matrix algebra, <code>openMP</code> for
+parallelization (<code>omp for</code> for precision matrix components, <code>omp
+   for</code> with <code>reduction</code> clause to compute quadratic form in
+Pseudocode 3). Use an efficient search algorithm for fast neighest
+neighbors rather than bruteforcing.
+</p>
+<ul class="org-ul">
+<li>Experiment #1 (model run time)
+<ul class="org-ul">
+<li>permutation matrix has large impact con efficiency</li>
+<li>response is dramatically faster than collapsed</li>
+<li>marginal and negligible improvement beyond 6 and 12 CPUs,
+overhead if more</li>
+<li>point of diminishing returns vary with \(n\)</li>
+<li>run time: 13, 13, 95 seconds per iteration with a \(n = 10^7\)
+(ten million!) for response, conjugate, and collapse</li>
+</ul></li>
+<li>Experiment #2 (prediction)
+<ul class="org-ul">
+<li>all methods yield similar statistics</li>
+</ul></li>
+<li>TIU dataset
+<ul class="org-ul">
+<li>5 million data points</li>
+<li>\(m = 15\) and \(m = 25\) produce indistinguishable results</li>
+<li>similar, if not identical, prediction statistics across all
+methods</li>
+<li>run time: 318, 38, 2E-3 hours for collapse (25,000 samples),
+response, and conjugate NNGP</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-Summary" class="outline-3">
+<h3 id="Summary"><span class="section-number-3">2.4</span> Summary</h3>
+<div class="outline-text-3" id="text-2-4">
+<ul class="org-ul">
+<li>collapsed is the only fully Bayesian alternative for inference
+on the spatial random effects</li>
+<li>conjugate model's uncompromised predictive inference requires the
+specification of some model parameters</li>
+<li>the <code>spNNGP</code> R package implements response and conjugate NNGP</li>
+<li>for nonstationary processes, dynamic neighbor-finding algorithms
+may offer better starting point</li>
+</ul>
+
+<hr />
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions" class="outline-2">
+<h2 id="Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions"><span class="section-number-2">3</span> Vecchia Approximations of Gaussian-Process Predictions</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Matthias Katzfuss, Joseph Guinness, Wenlong Gong &amp; Daniel Zilber 2020
+<a href="https://doi.org/10.1007/s13253-020-00401-7">https://doi.org/10.1007/s13253-020-00401-7</a>
+</p>
+</div>
+
+<div id="outline-container-Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions--Introduction" class="outline-3">
+<h3 id="Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions--Introduction"><span class="section-number-3">3.1</span> Introduction</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>GP approximations
+<ul class="org-ul">
+<li>sparse covariance matrix, sparse precision matrix, composite
+likelihood, low-rank structure.</li>
+<li>Low-rank approaches are poorly suited for fine-scale dependence</li>
+<li>Sparse methods cannot guarantee linear times</li>
+<li>Local GP approximations do not scale well to joint predictions
+at many locations</li>
+</ul></li>
+<li>Vecchia approximation
+<ul class="org-ul">
+<li>Training: sparse Cholesky factor of the precision matrix by removing
+conditioning variables in a factorization of the observations
+joint density into a product of conditional distributions</li>
+<li>Prediction: Vecchia's one-at-a-time has squared time
+complexity, Finley one-for-one output sampling from the
+posterior predictive distributions using a covariance matrix
+constructed only with neighbors, conditional expectation and
+uncertainty quantification via conditional simulations, domain
+partitioning approximations</li>
+</ul></li>
+<li>This paper approach guarantees sparsity of the matrices necessary
+for inference, resulting in linear memory and time complexity in
+the number of data points and predictions for fixed
+conditioning-set size</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-General%20Vecchia%20Framework" class="outline-3">
+<h3 id="General%20Vecchia%20Framework"><span class="section-number-3">3.2</span> General Vecchia Framework</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li>For a vector \(mathbf{x}\) with precision matrix \(\mathbf{Q}\),
+\(\mathbf{U} = \textsc{rchol}\left(\mathbf{Q}\right)\) is the
+upper-lower Cholesky decomposition of \(\mathbf{Q}\)
+s.t. \(\mathbf{Q} = \mathbf{U}\mathbf{U}^{\top}\). Nonzero entries
+of \(\mathbf{U}\) can be computed directly, i.e., the matrix
+\(\mathbf{Q}\) need not be constructed.</li>
+<li></li>
+</ul>
+
+<hr />
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+The original paper has a linear mean model that was assumed to
+be zero for these notes. GLS for linear coefficients should be easy to
+plug in.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+The paper starts with spatially or temporally ordered neighbors
+\(\left\{z_j: 1 \le j \le i - 1\right\}\).
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+No need to increase \(m\) by an unit really.
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Author: Luis Damiano</p>
+<p class="date">Created: 2022-02-21 Mon 13:00</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
