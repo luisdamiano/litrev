@@ -1,0 +1,53 @@
+* Computer experiments with functional inputs and scalar outputs
+  Thomas Muehlenstaedt, Jana Fruth & Olivier Roustant 2016
+  https://doi.org/10.1007/s11222-016-9672-z
+
+** Background and notation
+
+*** Some basics on B-spiles
+    B-splines are always bounded. Let $f(t) = \sum_{i=1}^K \beta_i
+    B_{i, m}(t)$, where $B_{i, m}, i = 1, \dots, K \ge m$ are B-spline
+    basis functions of order $m$ ($m = 1$ is piecewise constant
+    function) and $\mathbf{\beta} = (\beta_1, \dots, \beta_K)$ is the
+    vector of basis coefficients.
+
+    The basis functions are defined over a sequence of $K -
+    m + 2$ knots with $m - 1$ replicates for the first and last knot.
+    $\tau_1 = \dots = \tau_m < \tau_{m + 1} < \dots \tau_{K} \dots <
+    \tau_{K+m}$. The basis functions are found recursively (see
+    paper). At each point $t$, $\sum_{i=1}^K B_{i, m}(t) = 1$. If
+    $\mathbf{\beta} \in [0, 1]^K$, then $f(t) \in [0, 1]$.
+
+*** Distance-based approach
+    The $L_2$ norm for functions is
+    \[
+    D(f, \tilde{f}) = \sqrt{
+    \int_0^1 \left(f(t) - \tilde{f}(t)\right)^2 \ dt
+    }
+    \]
+    which simplifies to $\int_0^1 \sum_{i,j} \delta_i \delta_j b_i(t)
+    b_j(t) \mathrm{d}t = \mathbf{\delta}^\top \mathbf{J}
+    \mathbf{\delta}$ where $\delta_i = \beta_i - \tilde{\beta}_j$ (see
+    paper eq. 6).
+
+** Surrogate models
+
+*** Weighting
+
+    \begin{align}
+      D_{\omega}(f, \tilde{f})
+      &= \sqrt{
+	\int_0^1 \omega(t){\left(f(t) - \tilde{f}(t)\right)}^2 \ dt
+	} \\
+      &\approx \sqrt{
+	\int_0^1 \omega(t) {\left(
+	\sum_{i=1}^{K} \delta_i B_{i,m}(t) \omega(t) \mathrm{d}t
+	\right)}^2 \ dt
+	}
+    \end{align}
+
+    The integral needs to be computed numerically[fn:1]. At this point, they
+    make an assumption from paper eq. (13) to (14) that doesn't fit
+    what I need.
+
+[fn:1] The paper has the $\omega(t)$ function inside the squared parentheses.

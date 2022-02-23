@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-02-21 Mon 13:00 -->
+<!-- 2022-02-23 Wed 14:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Literature notes</title>
@@ -199,6 +199,10 @@
 <link id="pagestyle" rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css">
 <style type="text/css">
  pre.src {background-color: #282a36; color: #f8f8f2;}</style>
+<style type="text/css">
+ pre.src {background-color: #282a36; color: #f8f8f2;}</style>
+<style type="text/css">
+ pre.src {background-color: #282a36; color: #f8f8f2;}</style>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -282,6 +286,12 @@ favor to the authors. Don't blame anyone for the stuff written below.
 <ul>
 <li><a href="#Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions--Introduction">3.1. Introduction</a></li>
 <li><a href="#General%20Vecchia%20Framework">3.2. General Vecchia Framework</a></li>
+</ul>
+</li>
+<li><a href="#Computer%20experiments%20with%20functional%20inputs%20and%20scalar%20outputs">4. Computer experiments with functional inputs and scalar outputs</a>
+<ul>
+<li><a href="#Background%20and%20notation">4.1. Background and notation</a></li>
+<li><a href="#Surrogate%20models">4.2. Surrogate models</a></li>
 </ul>
 </li>
 </ul>
@@ -379,7 +389,7 @@ data).
 <h4 id="Iterative%20maximum%20likelihood%20estimation"><span class="section-number-4">1.2.2</span> Iterative maximum likelihood estimation</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
-The \(m\)-order approximate maximum likelihood estimates 
+The \(m\)-order approximate maximum likelihood estimates
 \(\hat{\mathbf{\psi}}_m\) are obtained by numerically maximizing the
 approximate likelihood function \(L_m\) for fixed \(m << n\). Start
 with \(m=1\) with some initial values \(\mathbf{\psi}_0\), estimate
@@ -589,6 +599,7 @@ specification of some model parameters</li>
 may offer better starting point</li>
 </ul>
 
+
 <hr />
 </div>
 </div>
@@ -646,10 +657,96 @@ upper-lower Cholesky decomposition of \(\mathbf{Q}\)
 s.t. \(\mathbf{Q} = \mathbf{U}\mathbf{U}^{\top}\). Nonzero entries
 of \(\mathbf{U}\) can be computed directly, i.e., the matrix
 \(\mathbf{Q}\) need not be constructed.</li>
-<li></li>
 </ul>
 
+
 <hr />
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-Computer%20experiments%20with%20functional%20inputs%20and%20scalar%20outputs" class="outline-2">
+<h2 id="Computer%20experiments%20with%20functional%20inputs%20and%20scalar%20outputs"><span class="section-number-2">4</span> Computer experiments with functional inputs and scalar outputs</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Thomas Muehlenstaedt, Jana Fruth &amp; Olivier Roustant 2016
+<a href="https://doi.org/10.1007/s11222-016-9672-z">https://doi.org/10.1007/s11222-016-9672-z</a>
+</p>
+</div>
+
+<div id="outline-container-Background%20and%20notation" class="outline-3">
+<h3 id="Background%20and%20notation"><span class="section-number-3">4.1</span> Background and notation</h3>
+<div class="outline-text-3" id="text-4-1">
+</div>
+<div id="outline-container-Some%20basics%20on%20B-spiles" class="outline-4">
+<h4 id="Some%20basics%20on%20B-spiles"><span class="section-number-4">4.1.1</span> Some basics on B-spiles</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<p>
+B-splines are always bounded. Let \(f(t) = \sum_{i=1}^K \beta_i
+    B_{i, m}(t)\), where \(B_{i, m}, i = 1, \dots, K \ge m\) are B-spline
+basis functions of order \(m\) (\(m = 1\) is piecewise constant
+function) and \(\mathbf{\beta} = (\beta_1, \dots, \beta_K)\) is the
+vector of basis coefficients.
+</p>
+
+<p>
+The basis functions are defined over a sequence of \(K -
+    m + 2\) knots with \(m - 1\) replicates for the first and last knot.
+\(\tau_1 = \dots = \tau_m < \tau_{m + 1} < \dots \tau_{K} \dots <
+    \tau_{K+m}\). The basis functions are found recursively (see
+paper). At each point \(t\), \(\sum_{i=1}^K B_{i, m}(t) = 1\). If
+\(\mathbf{\beta} \in [0, 1]^K\), then \(f(t) \in [0, 1]\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-Distance-based%20approach" class="outline-4">
+<h4 id="Distance-based%20approach"><span class="section-number-4">4.1.2</span> Distance-based approach</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+The \(L_2\) norm for functions is
+\[
+    D(f, \tilde{f}) = \sqrt{
+    \int_0^1 \left(f(t) - \tilde{f}(t)\right)^2 \ dt
+    }
+    \]
+which simplifies to \(\int_0^1 \sum_{i,j} \delta_i \delta_j b_i(t)
+    b_j(t) \mathrm{d}t = \mathbf{\delta}^\top \mathbf{J}
+    \mathbf{\delta}\) where \(\delta_i = \beta_i - \tilde{\beta}_j\) (see
+paper eq. 6).
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-Surrogate%20models" class="outline-3">
+<h3 id="Surrogate%20models"><span class="section-number-3">4.2</span> Surrogate models</h3>
+<div class="outline-text-3" id="text-4-2">
+</div>
+<div id="outline-container-Weighting" class="outline-4">
+<h4 id="Weighting"><span class="section-number-4">4.2.1</span> Weighting</h4>
+<div class="outline-text-4" id="text-4-2-1">
+\begin{align}
+  D_{\omega}(f, \tilde{f})
+  &= \sqrt{
+    \int_0^1 \omega(t){\left(f(t) - \tilde{f}(t)\right)}^2 \ dt
+    } \\
+  &\approx \sqrt{
+    \int_0^1 \omega(t) {\left(
+    \sum_{i=1}^{K} \delta_i B_{i,m}(t) \omega(t) \mathrm{d}t
+    \right)}^2 \ dt
+    }
+\end{align}
+
+<p>
+The integral needs to be computed numerically<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>. At this point, they
+make an assumption from paper eq. (13) to (14) that doesn't fit
+what I need.
+</p>
+
+<hr />
+</div>
 </div>
 </div>
 </div>
@@ -672,12 +769,16 @@ The paper starts with spatially or temporally ordered neighbors
 No need to increase \(m\) by an unit really.
 </p></div></div>
 
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+The paper has the \(\omega(t)\) function inside the squared parentheses.
+</p></div></div>
+
 
 </div>
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Luis Damiano</p>
-<p class="date">Created: 2022-02-21 Mon 13:00</p>
+<p class="date">Created: 2022-02-23 Wed 14:32</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
