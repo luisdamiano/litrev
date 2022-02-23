@@ -19,13 +19,13 @@
     \begin{align}
       L(\mathbf{z})
       &=
-         {\left(2\pi\right)}^{-n/2}
-         {\left(\sigma^2\gamma\right)}^{-n/2}
-         {\left|\mathbf{R} + \nu^2 \mathbf{I} \right|}^{-1/2}
-         \exp\left\{
-         {-(2\sigma^2\gamma)}^{-1}
-         \mathbf{z}^\top {(\mathbf{R} + \nu^2 \mathbf{I})}^{-1} \mathbf{z}
-        \right\} \\
+	 {\left(2\pi\right)}^{-n/2}
+	 {\left(\sigma^2\gamma\right)}^{-n/2}
+	 {\left|\mathbf{R} + \nu^2 \mathbf{I} \right|}^{-1/2}
+	 \exp\left\{
+	 {-(2\sigma^2\gamma)}^{-1}
+	 \mathbf{z}^\top {(\mathbf{R} + \nu^2 \mathbf{I})}^{-1} \mathbf{z}
+	\right\} \\
       \gamma
       &= \text{var}\left(\xi\right) / \sigma^2 \\
       \mathbf{R}
@@ -58,7 +58,7 @@
     from observations within a fixed distance (e.g., for lattice
     data).
 *** Iterative maximum likelihood estimation
-    The \(m\)-order approximate maximum likelihood estimates 
+    The \(m\)-order approximate maximum likelihood estimates
     $\hat{\mathbf{\psi}}_m$ are obtained by numerically maximizing the
     approximate likelihood function $L_m$ for fixed $m << n$. Start
     with $m=1$ with some initial values $\mathbf{\psi}_0$, estimate

@@ -31,4 +31,3 @@
      s.t. $\mathbf{Q} = \mathbf{U}\mathbf{U}^{\top}$. Nonzero entries
      of $\mathbf{U}$ can be computed directly, i.e., the matrix
      $\mathbf{Q}$ need not be constructed.
-   - 
