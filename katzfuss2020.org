@@ -25,7 +25,7 @@
      the number of data points and predictions for fixed
      conditioning-set size
 ** General Vecchia Framework
-   - For a vector $mathbf{x}$ with precision matrix $\mathbf{Q}$,
+   - For a vector $\mathbf{x}$ with precision matrix $\mathbf{Q}$,
      $\mathbf{U} = \textsc{rchol}\left(\mathbf{Q}\right)$ is the
      upper-lower Cholesky decomposition of $\mathbf{Q}$
      s.t. $\mathbf{Q} = \mathbf{U}\mathbf{U}^{\top}$. Nonzero entries
