@@ -1,0 +1,163 @@
+* Wavelets and their Applications
+  Michel Misiti, Yves Misiti, Georges Oppenheim, Jean-Michel Poggi 2010
+  [[https://www.wiley.com/en-us/Wavelets+and+their+Applications-p-9780470612491][ISBN: 978-0-470-61249-1]]
+
+  - a wavelet is a function oscillating as a wave but quickly damped,
+    hence well localized simultaneously in time and frequency
+    - Would this be related with _horizontal and vertical variability_
+      as in jointFPCA?
+  - Denoising or function estimation: calculate the wavelet transform
+    of observations, modify the coefficients profiting from their
+    local nature, and reverse the transformation
+  - Wavelets provide a generally very sparse representation, reducing
+    the volume of information to be coded
+
+** A tour and mathematical framework
+
+  Let $\psi(t): \mathcal{T} \to \mathbb{R}$ be a real wavelet
+  satisfying the sufficient admissibility conditions $\psi \in L^1
+  \cap L^2$, $t\,\psi(t) \in L^1$, and $\int_{\mathbb{R}}
+  \psi(t)\,\mathrm{d}t = 0$. From a single function $\psi(t)$ we build
+  a family of forms via translation and dilation with scale $a$ and
+  position $b$
+
+  #+begin_latex
+  \begin{equation}
+    \psi_{a,b}(t) = \frac{1}{\sqrt{a}} \psi\left(\frac{t -
+	b}{a}\right)\,\forall\,a\in\mathbb{R}^+, b\in\mathbb{R}
+  \end{equation}
+  #+end_latex
+
+  - Wavelets integrate to zero in frequency domain, i.e.,
+    $\int_{\mathbb{R}}\psi(t)\,\mathbb{d}t = 0$
+  - We often require wavelets to have $m$ vanishing moments, i.e.,
+    $\int_{\mathbb{R}} t^k \psi(t)\,\mathrm{d}t = 0$ for $k = 0,
+    \dots, m$. The higher $m$ is, the more $\psi(t)$ oscillates.
+  - Consider a wavelet that oscillates like a wave and is then
+    locatalized due to damping
+    - Oscillation is measured by the number of vanishing moments $m$
+    - Localization is evaluated in the interval where the wavelet
+      takes values significantly different from zero
+
+  Define $C_f(a, b)$ the continuous wavelet transform of a
+  finite-energy (square integrable) function $f$,
+  #+begin_latex
+    \begin{equation}
+      C_f(a, b) = \int_{\mathbb{R}} f(t)\, \overline{\psi_{a,b}(t)}
+      \,\mathrm{d}t
+    \end{equation}
+  #+end_latex
+
+  - We analyze $f(t)$ with the wavelet $\psi(t)$
+  - The wavelet coefficients $C_f(a, b)$ measure the fluctuations of
+    function $f$ at scale $a$
+  - It eliminates the trend at scale $a$ containing slower
+    evolutions to facilitate a local analysis of $f$
+  - If $\psi(t) = 0 \,\forall\,t\not\in[-M, M]$, then
+    $\psi_{a, b}(t) = 0 \,\forall\,t\not\in[-Ma + b, Ma+b]$. That
+    is, $C_f(a, b)$ depends on $f$ in a neighborhood $b$ with a
+    length proportional to $a$.
+  - Large values of $C_f(a, b)$ provide information on the local
+    irregularity of $f$ around position $b$ at scale $a$.
+
+  Restrict $a = 2^j$, $b = k\,2^j =
+  k\,a\,\forall\,(j,k)\in\mathbb{Z}^2$. Assume $\psi(t)$ has $m$
+  vanishing moments and is orthogonal to the polynomials of degree
+  lower of equal to $m$. Define the scaling function $\phi(t)$ and
+  their corresponding dilations and translations $\phi_{a,
+  b}(t)$. The scaling function $\phi_{a, b}(t)$ measures the local
+  approximation of function $f$ in a neighborhood $b$ at scale $a$
+  _needs checking_.
+  - The wavelet $\psi(t)$ oscillates and integrates to zero
+    while the scaling function $\phi(t)$ oscillates less and has
+    positive integral (typically, equal to 1).
+  - The scalar product $f(t)\,\psi(t)$ captures the fluctuations of
+    $f$ around a local average given by the scalar product
+    $f(t)\,\phi(t)$.
+
+  Define the /basic atoms of wavelets/
+  #+begin_latex
+  \begin{equation}
+    \begin{cases}
+      \psi_{j,k}(x)
+      &= 2^{-j/2}\,\psi(2^{-j}\,x -k)
+      &\forall\,(j,k) \in \mathbb{Z}^2\\
+      \phi_{j,k}(x)
+      &= 2^{-j/2}\,\phi(2^{-j}\,x -k)
+      &\forall\,(j,k) \in \mathbb{Z}^2\\
+    \end{cases}
+  \end{equation}
+  #+end_latex
+  The wavelet coefficients $\alpha_{j,k} = \int_{\mathbb{R}}
+  f(t)\,\psi_{j,k}(t)\,\mathrm{d}t$ and can be computed via a fast
+  algorithm involving four filters: low/high-pass decomposition,
+  low/high-pass reconstruction. Under some conditions, the signal
+  can be reconstructed with
+  #+begin_latex
+  \begin{equation}
+    f(t) =
+    \sum_{j \in \mathbb{Z}}
+    \sum_{j \in \mathbb{Z}}
+    \alpha_{j,k}\,\psi_{j,k}(t)
+  \end{equation}
+  #+end_latex
+  These are organized in a tree with:
+  - time $k = b/a = 2^{-j}a$ used to translate the forms for a given
+    level $j$, and
+  - scale $a = 2^j$ used to pass from level $j$ to the immediately
+    lower level
+
+  The local averages of $f$ are defined by the approximation
+  coefficient $\beta_{j,k} = \int_{\mathbb{R}}
+  f(t)\phi_{j,k}(t)\,\mathrm{d}t$ and the approximation signal
+  $A_j(t) = \sum_{k\in\mathbb{Z}} \beta_{j,k} \psi_{j,k}(t)
+  \,\mathrm{d}t$. Differences in two successive local averages are
+  defined by the wavelet or detail coefficients $\alpha_{j,k} =
+  \int_{\mathbb{R}} f(t) \psi_{j,k}(t) \,\mathrm{d}t$ and the detail
+  signal $D_j(t) = \sum_{k\in\mathbb{Z}} \alpha_{j,k}
+  \psi_{j,k}(t)$. The approximation and detail signals are a
+  function of time $t$ as the original signal $f(t)$ is, but the
+  coefficients of the level $j$ are dyadic in time $2^{j}\mathbb{Z}
+  = \{m\,2^j: m \in \mathbb{Z}\}$ (the subgroup of all integers that
+  are multiples of $2^j$, say $\dots$, -16, -8, 0, 8, 16, $\dots$
+  for $j=2$). To smooth a signal, truncate the reconstruction with
+  only $J$ wavelet coefficients $\hat{f}(t) = \sum_{1\le j\le
+  J}\sum_{k}\alpha_{j,k}\psi_{j,k}(t)$. The larger (smaller) $j$ is, the
+  coarser (finer) the approximation and detail are.
+
+  The discrete transform is defined
+  #+begin_latex
+  \begin{equation}
+  \psi_{p,n}(t) = a_0^{-p/2}\,\psi(a_0^{-p}\,t - n\,b_0)
+  \end{equation}
+  #+end_latex
+  for some fixed $a_0 > 1$, $b_0 > 0$, and $p,n\in\mathbb{Z}$. An
+  usual choice is $a_0 = 2$ and $b_0=1$ due to Shannon's sampling
+  theorem.
+
+** Wavelet families
+
+   Criterias for choosing a wavelet $\psi(t)$:
+   - support and speed of convergence to zero as $t\to\infty$, which
+     quantifies localization in time
+   - symmetry, which avoids dephasing
+   - number of zero moments, which helps with compression
+   - regularity, which helps with smooth and regular signals
+   - existence of scaling function $\phi(t)$
+   - orthogonality
+   - existence of explicit formula
+   - ease of calculation
+
+   Orthogonal wavelets with compact support
+   - Daubechies wavelets of order $N$
+     - Haat wavelet for $N = 1$
+     - No explicit expression for $N > 1$
+   - Symlets
+   - coifN
+   Orthogonal wavelets with non-compact support
+   - Meyer wavelet
+     - infinitely derivable
+     - not compactly supported, but converges fast to zero
+     - infinitely derivable
+     - derivatives converge fast to zero
+     - rapid decay
