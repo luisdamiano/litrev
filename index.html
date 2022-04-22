@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-04-20 Wed 14:50 -->
+<!-- 2022-04-22 Fri 09:11 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Literature notes</title>
@@ -242,36 +242,36 @@ favor to the authors. Don't blame anyone for the stuff written below.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4b70371">1. Estimation and Model Identification for Continuous Spatial</a>
+<li><a href="#Estimation%20and%20Model%20Identification%20for%20Continuous%20Spatial">1. Estimation and Model Identification for Continuous Spatial</a>
 <ul>
-<li><a href="#org47cf5e4">1.1. Introduction</a></li>
-<li><a href="#org54b00a7">1.2. Estimation</a></li>
+<li><a href="#Introduction">1.1. Introduction</a></li>
+<li><a href="#Estimation">1.2. Estimation</a></li>
 </ul>
 </li>
-<li><a href="#orga86ccd0">2. Efficient Algorithms for Bayesian Nearest Neighbor Gaussian Processes</a>
+<li><a href="#Efficient%20Algorithms%20for%20Bayesian%20Nearest%20Neighbor%20Gaussian%20Processes">2. Efficient Algorithms for Bayesian Nearest Neighbor Gaussian Processes</a>
 <ul>
-<li><a href="#org612edc2">2.1. Introduction</a></li>
-<li><a href="#orgcdebfbf">2.2. Nearest Neighbor Gaussian Processes</a></li>
-<li><a href="#org123341c">2.3. Implementation</a></li>
-<li><a href="#org3e37c6e">2.4. Summary</a></li>
+<li><a href="#Efficient%20Algorithms%20for%20Bayesian%20Nearest%20Neighbor%20Gaussian%20Processes--Introduction">2.1. Introduction</a></li>
+<li><a href="#Nearest%20Neighbor%20Gaussian%20Processes">2.2. Nearest Neighbor Gaussian Processes</a></li>
+<li><a href="#Implementation">2.3. Implementation</a></li>
+<li><a href="#Summary">2.4. Summary</a></li>
 </ul>
 </li>
-<li><a href="#orgec5f4d1">3. Vecchia Approximations of Gaussian-Process Predictions</a>
+<li><a href="#Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions">3. Vecchia Approximations of Gaussian-Process Predictions</a>
 <ul>
-<li><a href="#org4b1143a">3.1. Introduction</a></li>
-<li><a href="#org2f6aede">3.2. General Vecchia Framework</a></li>
+<li><a href="#Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions--Introduction">3.1. Introduction</a></li>
+<li><a href="#General%20Vecchia%20Framework">3.2. General Vecchia Framework</a></li>
 </ul>
 </li>
-<li><a href="#org1c25395">4. Computer experiments with functional inputs and scalar outputs</a>
+<li><a href="#Computer%20experiments%20with%20functional%20inputs%20and%20scalar%20outputs">4. Computer experiments with functional inputs and scalar outputs</a>
 <ul>
-<li><a href="#orgd2dc9d6">4.1. Background and notation</a></li>
-<li><a href="#orgb6d7919">4.2. Surrogate models</a></li>
+<li><a href="#Background%20and%20notation">4.1. Background and notation</a></li>
+<li><a href="#Surrogate%20models">4.2. Surrogate models</a></li>
 </ul>
 </li>
-<li><a href="#org3a66fde">5. Wavelets and their Applications</a>
+<li><a href="#Wavelets%20and%20their%20Applications">5. Wavelets and their Applications</a>
 <ul>
-<li><a href="#org2091dae">5.1. A tour and mathematical framework</a></li>
-<li><a href="#org5cf081d">5.2. Wavelet families</a></li>
+<li><a href="#A%20tour%20and%20mathematical%20framework">5.1. A tour and mathematical framework</a></li>
+<li><a href="#Wavelet%20families">5.2. Wavelet families</a></li>
 </ul>
 </li>
 </ul>
@@ -282,8 +282,8 @@ favor to the authors. Don't blame anyone for the stuff written below.
 <hr />
 
 
-<div id="outline-container-org4b70371" class="outline-2">
-<h2 id="org4b70371"><span class="section-number-2">1.</span> Estimation and Model Identification for Continuous Spatial</h2>
+<div id="outline-container-Estimation%20and%20Model%20Identification%20for%20Continuous%20Spatial" class="outline-2">
+<h2 id="Estimation%20and%20Model%20Identification%20for%20Continuous%20Spatial"><span class="section-number-2">1.</span> Estimation and Model Identification for Continuous Spatial</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 A. V. Vecchia 1988
@@ -291,8 +291,8 @@ A. V. Vecchia 1988
 </p>
 </div>
 
-<div id="outline-container-org47cf5e4" class="outline-3">
-<h3 id="org47cf5e4"><span class="section-number-3">1.1.</span> Introduction</h3>
+<div id="outline-container-Introduction" class="outline-3">
+<h3 id="Introduction"><span class="section-number-3">1.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>An empirical variogram is basically a method of moments estimate
@@ -305,12 +305,12 @@ initial values for estimates based on \(L_{m + 1}\)</li>
 </div>
 </div>
 
-<div id="outline-container-org54b00a7" class="outline-3">
-<h3 id="org54b00a7"><span class="section-number-3">1.2.</span> Estimation</h3>
+<div id="outline-container-Estimation" class="outline-3">
+<h3 id="Estimation"><span class="section-number-3">1.2.</span> Estimation</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-orgeccb04d" class="outline-4">
-<h4 id="orgeccb04d"><span class="section-number-4">1.2.1.</span> Approximate likelihood function</h4>
+<div id="outline-container-Approximate%20likelihood%20function" class="outline-4">
+<h4 id="Approximate%20likelihood%20function"><span class="section-number-4">1.2.1.</span> Approximate likelihood function</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Let \(\mathbf{z} = \xi(\mathbf{x}) + \mathbf{\eta}\), \(\xi\) is a
@@ -365,8 +365,8 @@ data).
 </p>
 </div>
 </div>
-<div id="outline-container-org098fb59" class="outline-4">
-<h4 id="org098fb59"><span class="section-number-4">1.2.2.</span> Iterative maximum likelihood estimation</h4>
+<div id="outline-container-Iterative%20maximum%20likelihood%20estimation" class="outline-4">
+<h4 id="Iterative%20maximum%20likelihood%20estimation"><span class="section-number-4">1.2.2.</span> Iterative maximum likelihood estimation</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 The \(m\)-order approximate maximum likelihood estimates
@@ -391,8 +391,8 @@ information criterion \(A_m = \Lambda_m + 2 |\mathbf{\psi}|\).
 </div>
 
 
-<div id="outline-container-orga86ccd0" class="outline-2">
-<h2 id="orga86ccd0"><span class="section-number-2">2.</span> Efficient Algorithms for Bayesian Nearest Neighbor Gaussian Processes</h2>
+<div id="outline-container-Efficient%20Algorithms%20for%20Bayesian%20Nearest%20Neighbor%20Gaussian%20Processes" class="outline-2">
+<h2 id="Efficient%20Algorithms%20for%20Bayesian%20Nearest%20Neighbor%20Gaussian%20Processes"><span class="section-number-2">2.</span> Efficient Algorithms for Bayesian Nearest Neighbor Gaussian Processes</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Andrew O. Finley, Abhirup Datta, Bruce D. Cook, Douglas C. Morton,
@@ -401,8 +401,8 @@ Hans E. Andersen &amp; Sudipto Banerjee 2019
 </p>
 </div>
 
-<div id="outline-container-org612edc2" class="outline-3">
-<h3 id="org612edc2"><span class="section-number-3">2.1.</span> Introduction</h3>
+<div id="outline-container-Efficient%20Algorithms%20for%20Bayesian%20Nearest%20Neighbor%20Gaussian%20Processes--Introduction" class="outline-3">
+<h3 id="Efficient%20Algorithms%20for%20Bayesian%20Nearest%20Neighbor%20Gaussian%20Processes--Introduction"><span class="section-number-3">2.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>exploit high-performance computing libraries to obviate expensive
@@ -416,8 +416,8 @@ al. (2016a)</li>
 </div>
 </div>
 
-<div id="outline-container-orgcdebfbf" class="outline-3">
-<h3 id="orgcdebfbf"><span class="section-number-3">2.2.</span> Nearest Neighbor Gaussian Processes</h3>
+<div id="outline-container-Nearest%20Neighbor%20Gaussian%20Processes" class="outline-3">
+<h3 id="Nearest%20Neighbor%20Gaussian%20Processes"><span class="section-number-3">2.2.</span> Nearest Neighbor Gaussian Processes</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Let \(y(\mathbf{s}_i)\) and \(\mathbf{x}(\mathbf{s}_i)\) denote the
@@ -481,8 +481,8 @@ marginalizing out the vector of spatial random effects.
 </p>
 </div>
 
-<div id="outline-container-org2f55f7d" class="outline-4">
-<h4 id="org2f55f7d"><span class="section-number-4">2.2.1.</span> Collapsed NNGP</h4>
+<div id="outline-container-Collapsed%20NNGP" class="outline-4">
+<h4 id="Collapsed%20NNGP"><span class="section-number-4">2.2.1.</span> Collapsed NNGP</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 Consider \(\textsc{N}(\mathbf{y} | \mathbf{X}\mathbf{\beta} +
@@ -500,8 +500,8 @@ spatial effect and prediction at new locations.
 </div>
 </div>
 
-<div id="outline-container-orgf4d5e06" class="outline-4">
-<h4 id="orgf4d5e06"><span class="section-number-4">2.2.2.</span> NNGP for the response</h4>
+<div id="outline-container-NNGP%20for%20the%20response" class="outline-4">
+<h4 id="NNGP%20for%20the%20response"><span class="section-number-4">2.2.2.</span> NNGP for the response</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <p>
 Apply nearest neighbor approximation directly to the marginal
@@ -517,8 +517,8 @@ Bayesian analysis of massive spatial datasets. See Algorithm 3 and
 </div>
 </div>
 
-<div id="outline-container-orgea5544c" class="outline-4">
-<h4 id="orgea5544c"><span class="section-number-4">2.2.3.</span> Conjugate NNGP for MCMC-free exact Bayesian inference</h4>
+<div id="outline-container-Conjugate%20NNGP%20for%20MCMC-free%20exact%20Bayesian%20inference" class="outline-4">
+<h4 id="Conjugate%20NNGP%20for%20MCMC-free%20exact%20Bayesian%20inference"><span class="section-number-4">2.2.3.</span> Conjugate NNGP for MCMC-free exact Bayesian inference</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <p>
 A hybrid cross-validation approach used when inference on
@@ -528,8 +528,8 @@ covariance parameters is of little interest. See Algorithm 5.
 </div>
 </div>
 
-<div id="outline-container-org123341c" class="outline-3">
-<h3 id="org123341c"><span class="section-number-3">2.3.</span> Implementation</h3>
+<div id="outline-container-Implementation" class="outline-3">
+<h3 id="Implementation"><span class="section-number-3">2.3.</span> Implementation</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 C++ with <code>openBLAS</code> and <code>LAPACK</code> for matrix algebra, <code>openMP</code> for
@@ -566,8 +566,8 @@ response, and conjugate NNGP</li>
 </div>
 </div>
 
-<div id="outline-container-org3e37c6e" class="outline-3">
-<h3 id="org3e37c6e"><span class="section-number-3">2.4.</span> Summary</h3>
+<div id="outline-container-Summary" class="outline-3">
+<h3 id="Summary"><span class="section-number-3">2.4.</span> Summary</h3>
 <div class="outline-text-3" id="text-2-4">
 <ul class="org-ul">
 <li>collapsed is the only fully Bayesian alternative for inference
@@ -586,8 +586,8 @@ may offer better starting point</li>
 </div>
 
 
-<div id="outline-container-orgec5f4d1" class="outline-2">
-<h2 id="orgec5f4d1"><span class="section-number-2">3.</span> Vecchia Approximations of Gaussian-Process Predictions</h2>
+<div id="outline-container-Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions" class="outline-2">
+<h2 id="Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions"><span class="section-number-2">3.</span> Vecchia Approximations of Gaussian-Process Predictions</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Matthias Katzfuss, Joseph Guinness, Wenlong Gong &amp; Daniel Zilber 2020
@@ -595,8 +595,8 @@ Matthias Katzfuss, Joseph Guinness, Wenlong Gong &amp; Daniel Zilber 2020
 </p>
 </div>
 
-<div id="outline-container-org4b1143a" class="outline-3">
-<h3 id="org4b1143a"><span class="section-number-3">3.1.</span> Introduction</h3>
+<div id="outline-container-Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions--Introduction" class="outline-3">
+<h3 id="Vecchia%20Approximations%20of%20Gaussian-Process%20Predictions--Introduction"><span class="section-number-3">3.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>GP approximations
@@ -627,8 +627,8 @@ conditioning-set size</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2f6aede" class="outline-3">
-<h3 id="org2f6aede"><span class="section-number-3">3.2.</span> General Vecchia Framework</h3>
+<div id="outline-container-General%20Vecchia%20Framework" class="outline-3">
+<h3 id="General%20Vecchia%20Framework"><span class="section-number-3">3.2.</span> General Vecchia Framework</h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>For a vector \(\mathbf{x}\) with precision matrix \(\mathbf{Q}\),
@@ -646,8 +646,8 @@ of \(\mathbf{U}\) can be computed directly, i.e., the matrix
 </div>
 
 
-<div id="outline-container-org1c25395" class="outline-2">
-<h2 id="org1c25395"><span class="section-number-2">4.</span> Computer experiments with functional inputs and scalar outputs</h2>
+<div id="outline-container-Computer%20experiments%20with%20functional%20inputs%20and%20scalar%20outputs" class="outline-2">
+<h2 id="Computer%20experiments%20with%20functional%20inputs%20and%20scalar%20outputs"><span class="section-number-2">4.</span> Computer experiments with functional inputs and scalar outputs</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Thomas Muehlenstaedt, Jana Fruth &amp; Olivier Roustant 2016
@@ -655,12 +655,12 @@ Thomas Muehlenstaedt, Jana Fruth &amp; Olivier Roustant 2016
 </p>
 </div>
 
-<div id="outline-container-orgd2dc9d6" class="outline-3">
-<h3 id="orgd2dc9d6"><span class="section-number-3">4.1.</span> Background and notation</h3>
+<div id="outline-container-Background%20and%20notation" class="outline-3">
+<h3 id="Background%20and%20notation"><span class="section-number-3">4.1.</span> Background and notation</h3>
 <div class="outline-text-3" id="text-4-1">
 </div>
-<div id="outline-container-orgbfced1c" class="outline-4">
-<h4 id="orgbfced1c"><span class="section-number-4">4.1.1.</span> Some basics on B-spiles</h4>
+<div id="outline-container-Some%20basics%20on%20B-spiles" class="outline-4">
+<h4 id="Some%20basics%20on%20B-spiles"><span class="section-number-4">4.1.1.</span> Some basics on B-spiles</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 B-splines are always bounded. Let \(f(t) = \sum_{i=1}^K \beta_i
@@ -681,8 +681,8 @@ paper). At each point \(t\), \(\sum_{i=1}^K B_{i, m}(t) = 1\). If
 </div>
 </div>
 
-<div id="outline-container-orgbe2ae3a" class="outline-4">
-<h4 id="orgbe2ae3a"><span class="section-number-4">4.1.2.</span> Distance-based approach</h4>
+<div id="outline-container-Distance-based%20approach" class="outline-4">
+<h4 id="Distance-based%20approach"><span class="section-number-4">4.1.2.</span> Distance-based approach</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
 The \(L_2\) norm for functions is
@@ -700,12 +700,12 @@ paper eq. 6).
 </div>
 </div>
 
-<div id="outline-container-orgb6d7919" class="outline-3">
-<h3 id="orgb6d7919"><span class="section-number-3">4.2.</span> Surrogate models</h3>
+<div id="outline-container-Surrogate%20models" class="outline-3">
+<h3 id="Surrogate%20models"><span class="section-number-3">4.2.</span> Surrogate models</h3>
 <div class="outline-text-3" id="text-4-2">
 </div>
-<div id="outline-container-org0a7f7fa" class="outline-4">
-<h4 id="org0a7f7fa"><span class="section-number-4">4.2.1.</span> Weighting</h4>
+<div id="outline-container-Weighting" class="outline-4">
+<h4 id="Weighting"><span class="section-number-4">4.2.1.</span> Weighting</h4>
 <div class="outline-text-4" id="text-4-2-1">
 \begin{align}
   D_{\omega}(f, \tilde{f})
@@ -732,8 +732,8 @@ what I need.
 </div>
 
 
-<div id="outline-container-org3a66fde" class="outline-2">
-<h2 id="org3a66fde"><span class="section-number-2">5.</span> Wavelets and their Applications</h2>
+<div id="outline-container-Wavelets%20and%20their%20Applications" class="outline-2">
+<h2 id="Wavelets%20and%20their%20Applications"><span class="section-number-2">5.</span> Wavelets and their Applications</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Michel Misiti, Yves Misiti, Georges Oppenheim, Jean-Michel Poggi 2010
@@ -755,8 +755,8 @@ the volume of information to be coded</li>
 </ul>
 </div>
 
-<div id="outline-container-org2091dae" class="outline-3">
-<h3 id="org2091dae"><span class="section-number-3">5.1.</span> A tour and mathematical framework</h3>
+<div id="outline-container-A%20tour%20and%20mathematical%20framework" class="outline-3">
+<h3 id="A%20tour%20and%20mathematical%20framework"><span class="section-number-3">5.1.</span> A tour and mathematical framework</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Let \(\psi(t): \mathcal{T} \to \mathbb{R}\) be a real wavelet
@@ -767,7 +767,7 @@ a family of forms via translation and dilation with scale \(a\) and
 position \(b\)
 </p>
 
-<div class="latex" id="org3576821">
+<div class="latex" id="orgc041292">
 \begin{equation}
   \psi_{a,b}(t) = \frac{1}{\sqrt{a}} \psi\left(\frac{t -
       b}{a}\right)\,\forall\,a\in\mathbb{R}^+, b\in\mathbb{R}
@@ -794,7 +794,7 @@ takes values significantly different from zero</li>
 Define \(C_f(a, b)\) the continuous wavelet transform of a
 finite-energy (square integrable) function \(f\),
 </p>
-<div class="latex" id="org4ef2896">
+<div class="latex" id="orga613fa9">
 \begin{equation}
   C_f(a, b) = \int_{\mathbb{R}} f(t)\, \overline{\psi_{a,b}(t)}
   \,\mathrm{d}t
@@ -838,7 +838,7 @@ positive integral (typically, equal to 1).</li>
 <p>
 Define the <i>basic atoms of wavelets</i>
 </p>
-<div class="latex" id="orgbaf39d8">
+<div class="latex" id="org965b905">
 \begin{equation}
   \begin{cases}
     \psi_{j,k}(x)
@@ -858,7 +858,7 @@ algorithm involving four filters: low/high-pass decomposition,
 low/high-pass reconstruction. Under some conditions, the signal
 can be reconstructed with
 </p>
-<div class="latex" id="orgd987b85">
+<div class="latex" id="orge986e18">
 \begin{equation}
   f(t) =
   \sum_{j \in \mathbb{Z}}
@@ -900,7 +900,7 @@ coarser (finer) the approximation and detail are.
 <p>
 The discrete transform is defined
 </p>
-<div class="latex" id="orgf6f17b7">
+<div class="latex" id="org84a7fc9">
 \begin{equation}
 \psi_{p,n}(t) = a_0^{-p/2}\,\psi(a_0^{-p}\,t - n\,b_0)
 \end{equation}
@@ -914,8 +914,8 @@ theorem.
 </div>
 </div>
 
-<div id="outline-container-org5cf081d" class="outline-3">
-<h3 id="org5cf081d"><span class="section-number-3">5.2.</span> Wavelet families</h3>
+<div id="outline-container-Wavelet%20families" class="outline-3">
+<h3 id="Wavelet%20families"><span class="section-number-3">5.2.</span> Wavelet families</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Criterias for choosing a wavelet \(\psi(t)\):
@@ -991,7 +991,7 @@ The paper has the \(\omega(t)\) function inside the squared parentheses.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Luis Damiano</p>
-<p class="date">Created: 2022-04-20 Wed 14:50</p>
+<p class="date">Created: 2022-04-22 Fri 09:11</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
