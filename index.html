@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-04-22 Fri 09:11 -->
+<!-- 2022-06-09 Thu 09:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Literature notes</title>
@@ -198,8 +198,6 @@
 <link id="pagestyle" rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css">
 <style type="text/css">
  pre.src {background-color: #282a36; color: #f8f8f2;}</style>
-<style type="text/css">
- pre.src {background-color: #282a36; color: #f8f8f2;}</style>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -274,6 +272,14 @@ favor to the authors. Don't blame anyone for the stuff written below.
 <li><a href="#Wavelet%20families">5.2. Wavelet families</a></li>
 </ul>
 </li>
+<li><a href="#Log%20Gaussian%20Cox%20processes%20on%20the%20sphere">6. Log Gaussian Cox processes on the sphere</a>
+<ul>
+<li><a href="#Log%20Gaussian%20Cox%20processes%20on%20the%20sphere--Introduction">6.1. Introduction</a></li>
+<li><a href="#Background">6.2. Background</a></li>
+<li><a href="#Log%20Gaussian%20Cox%20processes">6.3. Log Gaussian Cox processes</a></li>
+<li><a href="#Further%20remarks">6.4. Further remarks</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -321,13 +327,13 @@ exact likelihood is
 \begin{align}
   L(\mathbf{z})
   &=
-     {\left(2\pi\right)}^{-n/2}
-     {\left(\sigma^2\gamma\right)}^{-n/2}
-     {\left|\mathbf{R} + \nu^2 \mathbf{I} \right|}^{-1/2}
-     \exp\left\{
-     {-(2\sigma^2\gamma)}^{-1}
-     \mathbf{z}^\top {(\mathbf{R} + \nu^2 \mathbf{I})}^{-1} \mathbf{z}
-    \right\} \\
+ {\left(2\pi\right)}^{-n/2}
+ {\left(\sigma^2\gamma\right)}^{-n/2}
+ {\left|\mathbf{R} + \nu^2 \mathbf{I} \right|}^{-1/2}
+ \exp\left\{
+ {-(2\sigma^2\gamma)}^{-1}
+ \mathbf{z}^\top {(\mathbf{R} + \nu^2 \mathbf{I})}^{-1} \mathbf{z}
+\right\} \\
   \gamma
   &= \text{var}\left(\xi\right) / \sigma^2 \\
   \mathbf{R}
@@ -710,13 +716,13 @@ paper eq. 6).
 \begin{align}
   D_{\omega}(f, \tilde{f})
   &= \sqrt{
-    \int_0^1 \omega(t){\left(f(t) - \tilde{f}(t)\right)}^2 \ dt
-    } \\
+\int_0^1 \omega(t){\left(f(t) - \tilde{f}(t)\right)}^2 \ dt
+} \\
   &\approx \sqrt{
-    \int_0^1 \omega(t) {\left(
-    \sum_{i=1}^{K} \delta_i B_{i,m}(t) \omega(t) \mathrm{d}t
-    \right)}^2 \ dt
-    }
+\int_0^1 \omega(t) {\left(
+\sum_{i=1}^{K} \delta_i B_{i,m}(t) \omega(t) \mathrm{d}t
+\right)}^2 \ dt
+}
 \end{align}
 
 <p>
@@ -767,10 +773,10 @@ a family of forms via translation and dilation with scale \(a\) and
 position \(b\)
 </p>
 
-<div class="latex" id="orgc041292">
+<div class="latex" id="orge71cc0f">
 \begin{equation}
   \psi_{a,b}(t) = \frac{1}{\sqrt{a}} \psi\left(\frac{t -
-      b}{a}\right)\,\forall\,a\in\mathbb{R}^+, b\in\mathbb{R}
+  b}{a}\right)\,\forall\,a\in\mathbb{R}^+, b\in\mathbb{R}
 \end{equation}
 
 </div>
@@ -794,7 +800,7 @@ takes values significantly different from zero</li>
 Define \(C_f(a, b)\) the continuous wavelet transform of a
 finite-energy (square integrable) function \(f\),
 </p>
-<div class="latex" id="orga613fa9">
+<div class="latex" id="orgaf95dea">
 \begin{equation}
   C_f(a, b) = \int_{\mathbb{R}} f(t)\, \overline{\psi_{a,b}(t)}
   \,\mathrm{d}t
@@ -838,7 +844,7 @@ positive integral (typically, equal to 1).</li>
 <p>
 Define the <i>basic atoms of wavelets</i>
 </p>
-<div class="latex" id="org965b905">
+<div class="latex" id="org0b28c9b">
 \begin{equation}
   \begin{cases}
     \psi_{j,k}(x)
@@ -858,7 +864,7 @@ algorithm involving four filters: low/high-pass decomposition,
 low/high-pass reconstruction. Under some conditions, the signal
 can be reconstructed with
 </p>
-<div class="latex" id="orge986e18">
+<div class="latex" id="org970e845">
 \begin{equation}
   f(t) =
   \sum_{j \in \mathbb{Z}}
@@ -900,7 +906,7 @@ coarser (finer) the approximation and detail are.
 <p>
 The discrete transform is defined
 </p>
-<div class="latex" id="org84a7fc9">
+<div class="latex" id="org01e8b03">
 \begin{equation}
 \psi_{p,n}(t) = a_0^{-p/2}\,\psi(a_0^{-p}\,t - n\,b_0)
 \end{equation}
@@ -963,6 +969,91 @@ Orthogonal wavelets with non-compact support
 </div>
 </div>
 </div>
+
+
+<div id="outline-container-Log%20Gaussian%20Cox%20processes%20on%20the%20sphere" class="outline-2">
+<h2 id="Log%20Gaussian%20Cox%20processes%20on%20the%20sphere"><span class="section-number-2">6.</span> Log Gaussian Cox processes on the sphere</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Francisco Cuevas-Pacheco, Jesper Møller 2018
+<a href="https://doi.org/10.1016/j.spasta.2018.06.002">https://doi.org/10.1016/j.spasta.2018.06.002</a>
+</p>
+</div>
+
+<div id="outline-container-Log%20Gaussian%20Cox%20processes%20on%20the%20sphere--Introduction" class="outline-3">
+<h3 id="Log%20Gaussian%20Cox%20processes%20on%20the%20sphere--Introduction"><span class="section-number-3">6.1.</span> Introduction</h3>
+<div class="outline-text-3" id="text-6-1">
+<ul class="org-ul">
+<li>Although models and methods developed for planar and spatial point
+processes may be adapted, statistical methodology for point processes on
+the sphere is still not so developed</li>
+<li>Focus on Log Gaussian Crox processes for inhomogeneous aggregated/clustered
+point patterns on the sphere</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-Background" class="outline-3">
+<h3 id="Background"><span class="section-number-3">6.2.</span> Background</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Let \(\mathbb{S}^{d}: \{x\in\mathbb{R}^{d+1}: \lvert x \rvert = 1\}\) be a
+$d$-dimensional unit sphere included in the (\(d+1\))-dimensional Euclidean
+space equipped with inner product \(\langle x, y\rangle = \sum_{i=0}^{d}{x_i
+   y_i}\) and length \(\lvert x\rvert = \sqrt{\langle x, x\rangle}\). For unit
+vectors \(u,v\in\mathbb{S}^{d}\), let \(d(u,v) = \arccos(\langle u, v\rangle) =
+   \arccos(\sum_{i=0}^{d}{u_i,v_i})\) be the geodesic distance on the sphere.
+</p>
+
+<p>
+For a Poisson process \(\mathbf{X}\in\mathbb{S}^d\) with intensity function
+\(\lambda\), \(N(\mathbb{S}^d)\) is Poisson distributed with mean
+\(\int\lambda(u)\,\mathrm{d}u\) and, conditional on \(N(\mathbb{S}^d)\), the
+points in \(\mathbf{X}\) are iid with density proportal to \(\lambda\).
+</p>
+
+<p>
+Let \(\mathbf{Z} = \{\mathbf{Z}(u): u\in\mathbb{S}^d\}\) be a non-negative
+random field satisfying some conditions. Then \(\mathbf{X} | \mathbf{Z}\) is a
+Poisson process on \(\mathbb{S}^d\) with intensity function \(\mathbf{Z}\). The
+intensity of \(\mathbf{X}\) is \(\lambda(u) = \mathbb{E}[\mathbf{Z}(u)]\), and
+the residual driving random field \(\mathbf{Z}_0(u) = \mathbf{Z} / \lambda(u)\)
+has pair correlation function \(g(u,v) =
+   \mathbb{E}[\mathbf{Z}_0(u)\mathbf{Z}_0(v)]\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-Log%20Gaussian%20Cox%20processes" class="outline-3">
+<h3 id="Log%20Gaussian%20Cox%20processes"><span class="section-number-3">6.3.</span> Log Gaussian Cox processes</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Set \(\mathbb{Z} = \exp(\mathbf{Y})\) where \(Y=\{Y(u): u\in\mathbb{S}^d\}\) is a
+Gaussian random field. Then, a LGCP \(\mathbf{X}\) has intensity function
+\(\lambda(u) = \exp(\mu(u) + C(u,u)/2)\) and pair correlation function \(g(u,v)
+   = \exp(C(u,v))\) where \(\mu\) and \(C\) are the mean and covariance functions of
+the underlaying Gaussian random field.
+</p>
+</div>
+</div>
+
+<div id="outline-container-Further%20remarks" class="outline-3">
+<h3 id="Further%20remarks"><span class="section-number-3">6.4.</span> Further remarks</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+For any integer \(n\ge2\), the $n$-th order pair correaltion function is given
+by \(g(u_1, \dots, u_n) = \exp(\sum_{1\le{i}\le{j}\le{n}} C(u_i,u_j))\). The
+conditional distribution \(\mathbf{X}(v) | \mathbf{X}(u)\) for
+\(v\in\{\mathbb{S}^d \backslash {u}\}\) has mean function \(m_u(v)=m(v) + C(u,
+   v)\) and covariance function \(C(u, v)\) (covariance function remains
+unchanged).
+</p>
+
+
+<hr />
+</div>
+</div>
+</div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
@@ -991,7 +1082,7 @@ The paper has the \(\omega(t)\) function inside the squared parentheses.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Luis Damiano</p>
-<p class="date">Created: 2022-04-22 Fri 09:11</p>
+<p class="date">Created: 2022-06-09 Thu 09:40</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
