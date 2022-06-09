@@ -1,0 +1,46 @@
+* Log Gaussian Cox processes on the sphere
+  Francisco Cuevas-Pacheco, Jesper Møller 2018
+  https://doi.org/10.1016/j.spasta.2018.06.002
+
+** Introduction
+   - Although models and methods developed for planar and spatial point
+     processes may be adapted, statistical methodology for point processes on
+     the sphere is still not so developed
+   - Focus on Log Gaussian Crox processes for inhomogeneous aggregated/clustered
+     point patterns on the sphere
+
+** Background
+   Let $\mathbb{S}^{d}: \{x\in\mathbb{R}^{d+1}: \lvert x \rvert = 1\}$ be a
+   $d$-dimensional unit sphere included in the ($d+1$)-dimensional Euclidean
+   space equipped with inner product $\langle x, y\rangle = \sum_{i=0}^{d}{x_i
+   y_i}$ and length $\lvert x\rvert = \sqrt{\langle x, x\rangle}$. For unit
+   vectors $u,v\in\mathbb{S}^{d}$, let $d(u,v) = \arccos(\langle u, v\rangle) =
+   \arccos(\sum_{i=0}^{d}{u_i,v_i})$ be the geodesic distance on the sphere.
+
+   For a Poisson process $\mathbf{X}\in\mathbb{S}^d$ with intensity function
+   $\lambda$, $N(\mathbb{S}^d)$ is Poisson distributed with mean
+   $\int\lambda(u)\,\mathrm{d}u$ and, conditional on $N(\mathbb{S}^d)$, the
+   points in $\mathbf{X}$ are iid with density proportal to $\lambda$.
+
+   Let $\mathbf{Z} = \{\mathbf{Z}(u): u\in\mathbb{S}^d\}$ be a non-negative
+   random field satisfying some conditions. Then $\mathbf{X} | \mathbf{Z}$ is a
+   Poisson process on $\mathbb{S}^d$ with intensity function $\mathbf{Z}$. The
+   intensity of $\mathbf{X}$ is $\lambda(u) = \mathbb{E}[\mathbf{Z}(u)]$, and
+   the residual driving random field $\mathbf{Z}_0(u) = \mathbf{Z} / \lambda(u)$
+   has pair correlation function $g(u,v) =
+   \mathbb{E}[\mathbf{Z}_0(u)\mathbf{Z}_0(v)]$.
+
+** Log Gaussian Cox processes
+   Set $\mathbb{Z} = \exp(\mathbf{Y})$ where $Y=\{Y(u): u\in\mathbb{S}^d\}$ is a
+   Gaussian random field. Then, a LGCP $\mathbf{X}$ has intensity function
+   $\lambda(u) = \exp(\mu(u) + C(u,u)/2)$ and pair correlation function $g(u,v)
+   = \exp(C(u,v))$ where $\mu$ and $C$ are the mean and covariance functions of
+   the underlaying Gaussian random field.
+
+** Further remarks
+   For any integer $n\ge2$, the $n$-th order pair correaltion function is given
+   by $g(u_1, \dots, u_n) = \exp(\sum_{1\le{i}\le{j}\le{n}} C(u_i,u_j))$. The
+   conditional distribution $\mathbf{X}(v) | \mathbf{X}(u)$ for
+   $v\in\{\mathbb{S}^d \backslash {u}\}$ has mean function $m_u(v)=m(v) + C(u,
+   v)$ and covariance function $C(u, v)$ (covariance function remains
+   unchanged).
